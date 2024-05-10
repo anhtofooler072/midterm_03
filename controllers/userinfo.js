@@ -1,4 +1,4 @@
-import UserInfoModel from "../models/user/userInfo";
+import UserInfoModel from "../models/user/userInfo.js";
 
 const userInfoController = {
     createbio: async (req, res) => {
