@@ -1,23 +1,21 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import jwt, { decode } from "jsonwebtoken";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const auth = {
-    verifyToken: (req, res, next) => {
-        const token = req.headers['x-access-token'];
-        if (!token) {
-        return res.status(403).send({ message: 'No token provided!' });
-        }
-    
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(401).send({ message: 'Unauthorized!' });
-        }
-        req.userId = decoded.id;
-        next();
-        });
+  verifyToken: (req, res, next) => {
+    // verify bearer token then take the userId
+    try {
+      const token = req.header("Authorization").split(" ")[1];
+      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+      req.userEmail = decoded.email;
+      console.log(req.userEmail);
+      next();
+    } catch (error) {
+      res.status(400).send("Invalid token");
     }
+  },
 };
 
 export default auth;
