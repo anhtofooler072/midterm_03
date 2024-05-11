@@ -5,6 +5,7 @@ const jobInfoSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
+    unique: true,
   },
   project: {
     name: {
@@ -17,11 +18,11 @@ const jobInfoSchema = new mongoose.Schema({
     },
     role: String,
     startDate: {
-      type: Date,
+      type: String,
       required: true,
     },
     endDate: {
-      type: Date,
+      type: String,
       required: true,
     },
   },
@@ -34,8 +35,8 @@ const jobInfoSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    startDate: Date,
-    endDate: Date,
+    startDate: String,
+    endDate: String,
     website: String,
   },
 });
