@@ -3,7 +3,8 @@ import UserInfoModel from "../models/user/userInfo.js";
 const userInfoController = {
   createbio: async (req, res) => {
     try {
-      const { userId, name, dob, nation, hometown, education } = req.body;
+      const { userId } = req.userId;
+      const { name, dob, nation, hometown, education } = req.body;
       const userInfo = new UserInfoModel({
         userId,
         name,
