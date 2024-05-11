@@ -1,10 +1,15 @@
 import UserInfoModel from "../models/user/userInfo.js";
+import LoginInfoModel from "../models/user/logininfo.js";
 
 const userInfoController = {
   createbio: async (req, res) => {
     try {
-      const { userId } = req.userId;
+      const email = req.userEmail;
+      console.log(email);
       const { name, dob, nation, hometown, education } = req.body;
+      // find the userId in loginInfo through email
+      const loginInfo = await LoginInfoModel.findOne({ email });
+      const userId = loginInfo._id;
       const userInfo = new UserInfoModel({
         userId,
         name,
@@ -12,7 +17,7 @@ const userInfoController = {
         nation,
         hometown,
         education,
-      });
+      });  
       await userInfo.save();
       res.status(201).send(userInfo);
     } catch (error) {
@@ -21,7 +26,9 @@ const userInfoController = {
   },
   updatebio: async (req, res) => {
     try {
-      const { userId } = req.params;
+      const email = req.userEmail;
+      const loginInfo = await LoginInfoModel.findOne({ email });
+      const userId = loginInfo._id;
       const { name, dob, nation, hometown, education } = req.body;
       const userInfo = await UserInfoModel.findOne({ userId });
       userInfo.name = name;
