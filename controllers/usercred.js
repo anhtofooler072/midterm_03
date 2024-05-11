@@ -1,4 +1,4 @@
-import LoginInfoModel from "../models/user/logininfo";
+import LoginInfoModel from "../models/user/logininfo.js";
 
 const userCredController = {
     createNewUser: async (req, res) => {
@@ -6,7 +6,7 @@ const userCredController = {
             const { email, password } = req.body;
             const loginInfo = new LoginInfoModel({
                 email,
-                password,
+                passworjsjs
             });
             await loginInfo.save();
             res.status(201).send(loginInfo);
