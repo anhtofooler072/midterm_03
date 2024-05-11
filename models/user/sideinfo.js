@@ -5,12 +5,13 @@ const sideInfoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
+        unique: true,
     },
     hobies: {
         type:[String],
         default: []
     },
-    lifelonggoals: {
+    lifeLongGoal: {
         type: String,
         default: ""
     },
