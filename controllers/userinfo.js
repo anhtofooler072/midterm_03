@@ -17,7 +17,7 @@ const userInfoController = {
         nation,
         hometown,
         education,
-      });  
+      });
       await userInfo.save();
       res.status(201).send(userInfo);
     } catch (error) {
@@ -37,6 +37,17 @@ const userInfoController = {
       userInfo.hometown = hometown;
       userInfo.education = education;
       await userInfo.save();
+      res.status(200).send(userInfo);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  },
+  deletebio: async (req, res) => {
+    try {
+      const email = req.userEmail;
+      const loginInfo = await LoginInfoModel.findOne({ email });
+      const userId = loginInfo._id;
+      const userInfo = await UserInfoModel.findOneAndDelete({ userId });
       res.status(200).send(userInfo);
     } catch (error) {
       res.status(400).send(error);

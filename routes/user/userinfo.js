@@ -6,5 +6,6 @@ const userInfoRouter = Router();
 
 userInfoRouter.post("/createbio", auth.verifyToken, userInfoController.createbio);
 userInfoRouter.put("/updatebio", auth.verifyToken, userInfoController.updatebio);
+userInfoRouter.delete("/deletebio", auth.verifyToken, userInfoController.deletebio);
 
 export default userInfoRouter;
